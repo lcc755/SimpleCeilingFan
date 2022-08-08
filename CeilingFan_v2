@@ -1,0 +1,69 @@
+import java.awt.*; 
+import java.util.Scanner;
+import javax.swing.*;  
+import java.awt.event.*;    
+
+class CeilingFanApp {  
+    static int currentSpeed = 0;
+    static boolean isReversed = false;
+
+    public static void main(String args[]){  
+
+        // Setup
+        JFrame f=new JFrame("Ceiling Fan");  
+        JLabel instrLbl = new JLabel("Click to pull fan control");  
+        instrLbl.setBounds(10,10, 300,30);  
+        f.add(instrLbl); 
+        f.setSize(400,200);  
+        f.setLayout(null);  
+        f.setVisible(true);   
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Add labels to display results
+        JLabel speedLbl = new JLabel("Current Speed Level => ");  
+        JLabel speedResult = new JLabel("" + currentSpeed);
+        JLabel directionLbl = new JLabel("Current Direction => ");
+        JLabel directioResult = new JLabel("Clockwise");
+        speedLbl.setBounds(50,100, 300,30);  
+        speedResult.setBounds(250,100, 300,30);  
+        directionLbl.setBounds(50,125, 300,30);
+        directioResult.setBounds(250,125, 300,30);
+         f.add(speedLbl);
+         f.add(speedResult);
+         f.add(directionLbl);  
+         f.add(directioResult);  
+
+
+         // Add JButtons
+         JButton speedBtn =new JButton("Speed Pull");  
+         JButton directionBtn =new JButton("Direction Pull");
+         speedBtn.setBounds(25,50,150,30);  
+         directionBtn.setBounds(200,50,150,30);
+         
+         speedBtn.addActionListener(new ActionListener(){  
+             public void actionPerformed(ActionEvent e){      
+                 if (currentSpeed == 3) {
+                     currentSpeed = 0;
+                     speedResult.setText("Fan off");
+                 }
+                 else {
+                     currentSpeed += 1;
+                     speedResult.setText("" + currentSpeed);
+                 } 
+             }  
+         });
+
+         directionBtn.addActionListener(new ActionListener(){  
+             public void actionPerformed(ActionEvent e){  
+                 isReversed = !isReversed;
+                         
+                 String reversedStr = "Clockwise";
+                 if (isReversed) reversedStr = "Counter-Clockwise";
+                 directioResult.setText(reversedStr);
+             }  
+         });  
+         f.add(speedBtn); f.add(directionBtn);
+
+    }
+
+}  
